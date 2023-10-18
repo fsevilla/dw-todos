@@ -1,0 +1,16 @@
+<form (submit)="login()">
+    <h1>Iniciar Sesion</h1>
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input name="email" matInput type="text" [(ngModel)]="email">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input name="pwd" matInput [type]="inputType" [(ngModel)]="password">
+        <mat-icon matSuffix (click)="togglePassword()">{{inputType === 'text' ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </mat-form-field>
+    <div>
+        <span>No tienes cuenta? <a routerLink="/signup">Registrate aqui</a></span>
+        <button mat-stroked-button color="primary">Log in</button>
+    </div>
+</form>

@@ -1,0 +1,36 @@
+<form (submit)="signup()" [formGroup]="signupForm">
+    <h1>Registro</h1>
+    <p>Valido: {{signupForm.valid}}</p>
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input type="text" matInput formControlName="name">
+        <mat-error *ngIf="hasError('name', 'required')">Este campo es requerido</mat-error>
+        <mat-error *ngIf="hasError('name', 'minlength')">Requieres minimo 3 caracteres</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email">
+        <mat-error>
+            {{ hasError('email', 'required') ? 'Este campo es requerido' : 'Debe ser un correo valido' }}
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Code</mat-label>
+        <input type="text" matInput formControlName="code">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Confirm password</mat-label>
+        <input type="password" matInput formControlName="confirm">
+    </mat-form-field>
+    <div>
+        <span>Ya tienes una cuenta? <a routerLink="/login">Inicia sesión aquí</a></span>
+    </div>
+    <div class="actions">
+        <mat-checkbox color="primary" formControlName="terms">Acepto los terminos</mat-checkbox>
+        <button [disabled]="signupForm.invalid" mat-stroked-button color="primary">Crear</button>
+    </div>
+</form>
