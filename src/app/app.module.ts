@@ -15,6 +15,9 @@ import { TodosComponent } from './pages/todos/todos.component';
 import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { TareasComponent } from './pages/tareas/tareas.component';
+import { TodosListComponent } from './pages/todos/todos-list/todos-list.component';
+import { NewTodoComponent } from './pages/todos/new-todo/new-todo.component';
+import { TodoDetailsComponent } from './pages/todos/todo-details/todo-details.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { TareasComponent } from './pages/tareas/tareas.component';
     TodosComponent,
     NotFoundComponent,
     SignupComponent,
-    TareasComponent
+    TareasComponent,
+    TodosListComponent,
+    NewTodoComponent,
+    TodoDetailsComponent
   ],
   imports: [
     BrowserModule,
