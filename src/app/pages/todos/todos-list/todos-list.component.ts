@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { SpinnerService } from 'src/app/modules/spinner/spinner.service';
 import { Todo } from 'src/app/shared/interfaces/todo';
 import { TodoService } from 'src/app/shared/services/todo.service';
 
@@ -12,28 +13,28 @@ export class TodosListComponent implements OnInit {
 
   todos: Todo[] = [];
   displayedColumns: string[] = ['title', 'description', 'status'];
-  isLoading: boolean = false;
+
   
   currentTodo: Todo = {
     title: '',
     description: ''
   }
 
-  constructor(private todoService: TodoService) {}
+  constructor(private todoService: TodoService, private spinnerService: SpinnerService) {}
 
   ngOnInit(): void {
     this.getTodos();
   }
 
   getTodos() {
-    this.isLoading = true;
+    this.spinnerService.setStatus(true);
     this.todoService.getTodos().subscribe({
       next: (response: Todo[]) => {
         this.todos = response;
-        this.isLoading = false;
+        this.spinnerService.setStatus(false);
       },
       error: () => {
-        this.isLoading = false;
+        this.spinnerService.setStatus(false);
       }
     });
   }

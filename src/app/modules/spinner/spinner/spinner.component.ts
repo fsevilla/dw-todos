@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { SpinnerService } from '../spinner.service';
 
 @Component({
   selector: 'app-spinner',
@@ -7,6 +8,12 @@ import { Component, Input } from '@angular/core';
 })
 export class SpinnerComponent {
 
-  @Input() loading: boolean = false;
+  loading: boolean = false;
+
+  constructor(spinnerService: SpinnerService) {
+    spinnerService.loadingStatus.subscribe((status: boolean) => {
+      this.loading = status;
+    });
+  }
 
 }
