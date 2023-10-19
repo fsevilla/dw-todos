@@ -34,7 +34,15 @@ export class TodosListComponent implements OnInit {
   }
 
   selectTodo(todo: Todo) {
-    this.currentTodo = todo;
+    if(todo._id !== this.currentTodo._id) {
+      this.currentTodo = {...todo};
+    }
+  }
+
+  doOnSave(todo: Todo) {
+    this.getTodos();
   }
 
 }
+
+

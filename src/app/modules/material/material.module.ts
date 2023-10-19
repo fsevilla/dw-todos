@@ -8,6 +8,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -23,7 +26,10 @@ import { MatTableModule } from '@angular/material/table';
     MatFormFieldModule,
     MatIconModule,
     MatCheckboxModule,
-    MatTableModule
+    MatTableModule,
+    MatSidenavModule,
+    MatListModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule { }

@@ -1,13 +1,22 @@
-<h3>Selected Todo</h3>
-<div>
-    <strong>Title: </strong>
-    <span>{{todo.title}}</span>
-</div>
-<div>
-    <strong>Description: </strong>
-    <span>{{todo.description}}</span>
-</div>
-<div>
-    <strong>Status: </strong>
-    <span>{{todo.status}}</span>
-</div>
+<form (submit)="save()">
+    <h2>Selected Todo</h2>
+    <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input name="title" type="text" matInput [(ngModel)]="todo.title">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Description: </mat-label>
+        <textarea name="description" matInput [(ngModel)]="todo.description"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select name="status" [(ngModel)]="todo.status">
+            <mat-option value="new">New</mat-option>
+            <mat-option value="in progress">In Progress</mat-option>
+            <mat-option value="done">Done</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div>
+        <a (click)="cancel()" mat-flat-button>Cancel</a>
+        <button mat-flat-button color="primary">Save</button>
+    </div>
+</form>
