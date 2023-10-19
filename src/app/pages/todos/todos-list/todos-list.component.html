@@ -29,6 +29,6 @@
     <mat-drawer #drawer mode="over" position="end">
         <app-todo-details (onSave)="drawer.close(); doOnSave($event)" (onCancel)="drawer.close()" [item]="currentTodo"></app-todo-details>
     </mat-drawer>
-    
-
 </mat-drawer-container>
+
+<app-spinner [loading]="isLoading"></app-spinner>

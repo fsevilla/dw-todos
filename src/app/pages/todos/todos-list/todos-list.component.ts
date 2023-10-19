@@ -12,6 +12,7 @@ export class TodosListComponent implements OnInit {
 
   todos: Todo[] = [];
   displayedColumns: string[] = ['title', 'description', 'status'];
+  isLoading: boolean = false;
   
   currentTodo: Todo = {
     title: '',
@@ -25,11 +26,15 @@ export class TodosListComponent implements OnInit {
   }
 
   getTodos() {
+    this.isLoading = true;
     this.todoService.getTodos().subscribe({
       next: (response: Todo[]) => {
         this.todos = response;
+        this.isLoading = false;
       },
-      error: () => {}
+      error: () => {
+        this.isLoading = false;
+      }
     });
   }
 

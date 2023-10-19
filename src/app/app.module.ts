@@ -18,6 +18,7 @@ import { TareasComponent } from './pages/tareas/tareas.component';
 import { TodosListComponent } from './pages/todos/todos-list/todos-list.component';
 import { NewTodoComponent } from './pages/todos/new-todo/new-todo.component';
 import { TodoDetailsComponent } from './pages/todos/todo-details/todo-details.component';
+import { SpinnerModule } from './modules/spinner/spinner.module';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { TodoDetailsComponent } from './pages/todos/todo-details/todo-details.co
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
