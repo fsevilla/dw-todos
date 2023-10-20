@@ -7,12 +7,14 @@ import { TodosComponent } from './pages/todos/todos.component';
 import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
 import { TodosListComponent } from './pages/todos/todos-list/todos-list.component';
 import { NewTodoComponent } from './pages/todos/new-todo/new-todo.component';
+import { AuthGuard } from './shared/guards/auth.guard';
+import { UnauthGuard } from './shared/guards/unauth.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'todos', component: TodosComponent, children: [
+  { path: '', pathMatch: 'full', redirectTo: 'todos' },
+  { path: 'login', component: LoginComponent, canActivate: [UnauthGuard] },
+  { path: 'signup', component: SignupComponent, canActivate: [UnauthGuard] },
+  { path: 'todos', component: TodosComponent, canActivate: [AuthGuard], children: [
     { path: '', component: TodosListComponent },
     { path: 'new', component: NewTodoComponent }
   ] },

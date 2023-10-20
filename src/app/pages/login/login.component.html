@@ -10,6 +10,9 @@
         <mat-icon matSuffix (click)="togglePassword()">{{inputType === 'text' ? 'visibility_off' : 'visibility'}}</mat-icon>
     </mat-form-field>
     <div>
+        <p class="error" *ngIf="error">
+            El usuario/contraseña es incorrecto
+        </p>
         <span>No tienes cuenta? <a routerLink="/signup">Registrate aqui</a></span>
         <button mat-stroked-button color="primary">Log in</button>
     </div>
