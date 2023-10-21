@@ -9,9 +9,7 @@ export class AuthDirective implements OnInit {
 
   @Input() appAuth: boolean = false;
 
-  constructor(private authService: AuthService, private templateRef: TemplateRef<any>, private containerRef: ViewContainerRef ) {
-    
-  }
+  constructor(private authService: AuthService, private templateRef: TemplateRef<any>, private containerRef: ViewContainerRef ) {}
 
   ngOnInit(): void {
     this.authService.authStatus.subscribe((status: boolean) => {
