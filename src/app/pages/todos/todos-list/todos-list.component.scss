@@ -1,5 +1,27 @@
 mat-drawer {
     width: 300px;
+    padding: 20px;
+}
+
+mat-drawer-content {
+    padding: 20px 0;
+    min-height: 400px;
+}
+
+.heading {
+    h2 {
+        float: left;
+    }
+
+    button {
+        float: right;
+    }
+
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 }
 
 .row {

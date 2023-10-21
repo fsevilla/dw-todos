@@ -1,1 +1,25 @@
-<p>new-todo works!</p>
+<form [formGroup]="form" (submit)="create()">
+    <h2>New Todo</h2>
+    <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input type="text" matInput formControlName="title">
+        <mat-error>Required field</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Descripcion</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+        <mat-error>Required field</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select formControlName="status">
+            <mat-option value="">Select an option</mat-option>
+            <mat-option value="new">New</mat-option>
+            <mat-option value="in progress">In Progress</mat-option>
+            <mat-option value="done">Done</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div>
+        <a (click)="cancel()" mat-flat-button>Cancel</a>
+        <button [disabled]="form.invalid" mat-flat-button color="primary">Create</button>
+    </div>
+</form>

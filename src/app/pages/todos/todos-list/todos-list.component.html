@@ -1,9 +1,18 @@
 <mat-drawer-container>
 
     <mat-drawer-content>
-        <h2>Todos</h2>
 
-        <table mat-table [dataSource]="todos">
+        <div class="heading">
+            <h2>Todos</h2>
+
+            <button mat-mini-fab (click)="drawerSection = 'new'; drawer.open()" color="accent">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+
+        <h5 *ngIf="todos.length === 0">No records found</h5>
+
+        <table mat-table [dataSource]="todos" *ngIf="todos.length">
             <ng-container matColumnDef="title">
                 <th mat-header-cell *matHeaderCellDef>Title</th>
                 <td mat-cell *matCellDef="let item">{{item.title}}</td>
@@ -27,7 +36,8 @@
     </mat-drawer-content>
 
     <mat-drawer #drawer mode="over" position="end">
-        <app-todo-details (onSave)="drawer.close(); doOnSave($event)" (onCancel)="drawer.close()" [item]="currentTodo"></app-todo-details>
+        <app-new-todo *ngIf="drawerSection==='new'" (onCancel)="drawer.close()" (onCreated)="drawer.close(); doOnCreated($event)"></app-new-todo>
+        <app-todo-details *ngIf="drawerSection==='details'" (onSave)="drawer.close(); doOnSave($event)" (onCancel)="drawer.close()" [item]="currentTodo"></app-todo-details>
     </mat-drawer>
 </mat-drawer-container>
 

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { SpinnerService } from 'src/app/modules/spinner/spinner.service';
 import { Todo } from 'src/app/shared/interfaces/todo';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { TodoService } from 'src/app/shared/services/todo.service';
 
 @Component({
@@ -14,13 +16,15 @@ export class TodosListComponent implements OnInit {
   todos: Todo[] = [];
   displayedColumns: string[] = ['title', 'description', 'status'];
 
+  drawerSection: string = '';
+
   
   currentTodo: Todo = {
     title: '',
     description: ''
   }
 
-  constructor(private todoService: TodoService, private spinnerService: SpinnerService) {}
+  constructor(private todoService: TodoService, private spinnerService: SpinnerService, private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.getTodos();
@@ -33,19 +37,34 @@ export class TodosListComponent implements OnInit {
         this.todos = response;
         this.spinnerService.setStatus(false);
       },
-      error: () => {
+      error: (err) => {
         this.spinnerService.setStatus(false);
+        console.log('Error: ', err.status);
+        if(err.status === 401) {
+          this.authService.deleteToken();
+          this.router.navigate(['login']);
+        }
       }
     });
   }
 
   selectTodo(todo: Todo) {
+    this.drawerSection = 'details';
     if(todo._id !== this.currentTodo._id) {
       this.currentTodo = {...todo};
     }
   }
 
   doOnSave(todo: Todo) {
+    this.getTodos();
+  }
+
+  showCreateForm() {
+    this.drawerSection = 'new';
+  }
+
+  doOnCreated(todo: Todo) {
+    // this.todos.push(todo);
     this.getTodos();
   }
 
