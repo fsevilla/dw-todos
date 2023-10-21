@@ -2,10 +2,10 @@
     <mat-icon>task</mat-icon>
     <span>Mis Tareas</span>
     <span class="spacer"></span>
-    <a *ngIf="!loginStatus" routerLink="signup" mat-flat-button color="accent">Registrate</a>   
-    <a *ngIf="!loginStatus" routerLink="login" mat-button>Iniciar sesion</a>
-    <a *ngIf="loginStatus" routerLink="todos" mat-button>Mis Tareas</a>
-    <button *ngIf="loginStatus" (click)="logout()" mat-icon-button title="Cerrar sesion">
+    <a *appAuth="false"  routerLink="signup" mat-flat-button color="accent">Registrate</a>   
+    <a *appAuth="false" routerLink="login" mat-button>Iniciar sesion</a>
+    <a *appAuth="true" routerLink="todos" mat-button>Mis Tareas</a>
+    <button *appAuth="true" (click)="logout()" mat-icon-button title="Cerrar sesion">
         <mat-icon>logout</mat-icon>
     </button>
 </mat-toolbar>

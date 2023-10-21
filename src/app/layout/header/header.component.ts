@@ -9,13 +9,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class HeaderComponent {
 
-  loginStatus: boolean = false;
-
-  constructor(private authService: AuthService, private router: Router) {
-    this.authService.authStatus.subscribe((status: boolean) => {
-      this.loginStatus = status;
-    });
-  }
+  constructor(private authService: AuthService, private router: Router) {}
 
   logout() {
     this.authService.deleteToken();

@@ -14,7 +14,7 @@ import { TodoService } from 'src/app/shared/services/todo.service';
 export class TodosListComponent implements OnInit {
 
   todos: Todo[] = [];
-  displayedColumns: string[] = ['title', 'description', 'status'];
+  displayedColumns: string[] = ['title', 'description', 'status', 'date'];
 
   drawerSection: string = '';
 

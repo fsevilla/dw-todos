@@ -31,7 +31,7 @@ export class TodoDetailsComponent implements OnChanges {
         this.snackService.success('Changes saved');
         this.onSave.emit(this.todo);
       },
-      error: () => {
+      error: (err) => {
         this.snackService.error('Something went wrong');
       }
     });

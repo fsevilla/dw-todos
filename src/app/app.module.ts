@@ -19,6 +19,9 @@ import { TodosListComponent } from './pages/todos/todos-list/todos-list.componen
 import { NewTodoComponent } from './pages/todos/new-todo/new-todo.component';
 import { TodoDetailsComponent } from './pages/todos/todo-details/todo-details.component';
 import { SpinnerModule } from './modules/spinner/spinner.module';
+import { MayusculasPipe } from './shared/pipes/mayusculas.pipe';
+import { StatusDirective } from './shared/directives/status.directive';
+import { AuthDirective } from './shared/directives/auth.directive';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { SpinnerModule } from './modules/spinner/spinner.module';
     TareasComponent,
     TodosListComponent,
     NewTodoComponent,
-    TodoDetailsComponent
+    TodoDetailsComponent,
+    MayusculasPipe,
+    StatusDirective,
+    AuthDirective
   ],
   imports: [
     BrowserModule,
