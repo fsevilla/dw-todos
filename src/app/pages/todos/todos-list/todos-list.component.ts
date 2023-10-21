@@ -64,7 +64,6 @@ export class TodosListComponent implements OnInit {
   }
 
   doOnCreated(todo: Todo) {
-    // this.todos.push(todo);
     this.getTodos();
   }
 

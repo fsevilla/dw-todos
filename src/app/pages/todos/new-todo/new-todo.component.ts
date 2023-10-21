@@ -1,11 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { MatSnackBar } from '@angular/material/snack-bar';
-
 import { SpinnerService } from 'src/app/modules/spinner/spinner.service';
 import { Todo } from 'src/app/shared/interfaces/todo';
 import { TodoService } from 'src/app/shared/services/todo.service';
+import { SnackService } from 'src/app/shared/services/snack.service';
 
 @Component({
   selector: 'app-new-todo',
@@ -22,7 +21,7 @@ export class NewTodoComponent {
   constructor(
     formBuilder: FormBuilder, private todoService: TodoService,
     private spinnerService: SpinnerService,
-    private snackBar: MatSnackBar
+    private snackBar: SnackService
   ) {
     this.form = formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
@@ -43,20 +42,12 @@ export class NewTodoComponent {
       this.todoService.newTodo(values).subscribe({
         next: (response: Todo) => {
           this.spinnerService.setStatus(false);
-          this.snackBar.open('Task created successfully', 'SUCCESS', {
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-            duration: 3000
-          });
+          this.snackBar.success('Task created successfully');
           this.onCreated.emit(response);
         },
         error: () => {
           this.spinnerService.setStatus(false);
-          this.snackBar.open('Something went wrong', 'ERROR', {
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-            duration: 3000
-          });
+          this.snackBar.error('Something went wrong');
         }
       });
 

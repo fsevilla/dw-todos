@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { MatSnackBar } from '@angular/material/snack-bar';
-
 import { SignupUser } from 'src/app/shared/interfaces/signup-user';
 import { SignupService } from 'src/app/shared/services/signup.service';
+import { SnackService } from 'src/app/shared/services/snack.service';
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +18,7 @@ export class SignupComponent {
   constructor(
     formBuilder: FormBuilder,
     private signupService: SignupService,
-    private snackBar: MatSnackBar,
+    private snackBar: SnackService,
     private router: Router
   ) {
     this.signupForm = formBuilder.group({
@@ -41,19 +40,11 @@ export class SignupComponent {
       const datos: SignupUser = this.signupForm.getRawValue();
       this.signupService.signup(datos).subscribe({
         next: () => {
-          this.snackBar.open('Usuario creado correctamente', 'SUCCESS', {
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-            duration: 3000
-          });
+          this.snackBar.success('Usuario creado correctamente');
           this.router.navigate(['login']);
         },
         error: (err: any) => {
-          this.snackBar.open(err.error.error, 'ERROR', {
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-            duration: 3000
-          });
+          this.snackBar.error(err.error.error);
         }
       });
     } else {
