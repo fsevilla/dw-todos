@@ -1,5 +1,8 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+
 import { Todo } from 'src/app/shared/interfaces/todo';
+import { SnackService } from 'src/app/shared/services/snack.service';
+import { TodoService } from 'src/app/shared/services/todo.service';
 
 @Component({
   selector: 'app-todo-details',
@@ -16,12 +19,23 @@ export class TodoDetailsComponent implements OnChanges {
   @Output() onCancel: EventEmitter<void> = new EventEmitter();
   @Output() onSave: EventEmitter<Todo> = new EventEmitter<Todo>();
 
+  constructor(private todoService: TodoService, private snackService: SnackService) {}
+
   cancel() {
     this.onCancel.emit();
   }
 
   save() {
-    this.onSave.emit(this.todo);
+    this.todoService.updateTodo(this.todo).subscribe({
+      next: () => {
+        this.snackService.success('Changes saved');
+        this.onSave.emit(this.todo);
+      },
+      error: () => {
+        this.snackService.error('Something went wrong');
+      }
+    });
+    
   }
 
   ngOnChanges(changes: SimpleChanges) {

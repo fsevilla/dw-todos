@@ -23,4 +23,10 @@ export class TodoService {
     const url: string = environment.apiUrl + 'todos';
     return this.httpService.post(url, todo);
   }
+
+  updateTodo(todo: Todo): Observable<Todo> {
+    // const url: string = environment.apiUrl + 'todos/' + todo._id;
+    const url: string = `${environment.apiUrl}todos/${todo._id}`;
+    return this.httpService.put(url, todo);
+  }
 }

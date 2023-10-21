@@ -1,7 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
-import { Observable } from 'rxjs';
+import { Observable, throwError, catchError } from 'rxjs';
 
 import { AuthService } from './auth.service';
 
@@ -10,7 +11,7 @@ import { AuthService } from './auth.service';
 })
 export class HttpService {
 
-  constructor(private httpClient: HttpClient, private authService: AuthService) { }
+  constructor(private httpClient: HttpClient, private authService: AuthService, private router: Router) { }
 
   private getHeaders(): HttpHeaders {
     const headers: HttpHeaders = new HttpHeaders({
@@ -20,13 +21,31 @@ export class HttpService {
     return headers;
   }
 
+  private handleErrors(err: HttpErrorResponse) {
+    if(err.status === 401) {
+      this.authService.deleteToken();
+      this.router.navigate(['login']);
+      return throwError('Token expired');
+    } else {
+      return throwError('Generic error');
+    }
+  }
+
   get(url: string): Observable<any> {
     const headers: HttpHeaders = this.getHeaders();
-    return this.httpClient.get(url, { headers });
+    return this.httpClient.get(url, { headers })
+        .pipe(catchError((err: HttpErrorResponse) => this.handleErrors(err)));
   }
 
   post(url: string, data: any): Observable<any> {
     const headers: HttpHeaders = this.getHeaders();
-    return this.httpClient.post(url, data, { headers });
+    return this.httpClient.post(url, data, { headers })
+        .pipe(catchError((err: HttpErrorResponse) => this.handleErrors(err)));
+  }
+
+  put(url: string, data: any): Observable<any> {
+    const headers: HttpHeaders = this.getHeaders();
+    return this.httpClient.put(url, data, { headers })
+        .pipe(catchError((err: HttpErrorResponse) => this.handleErrors(err)));
   }
 }

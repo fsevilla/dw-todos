@@ -39,11 +39,6 @@ export class TodosListComponent implements OnInit {
       },
       error: (err) => {
         this.spinnerService.setStatus(false);
-        console.log('Error: ', err.status);
-        if(err.status === 401) {
-          this.authService.deleteToken();
-          this.router.navigate(['login']);
-        }
       }
     });
   }
